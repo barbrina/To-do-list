@@ -72,6 +72,34 @@ gerenciamento de tarefas, auxiliando na produtividade e organização pessoal.
 Dada a especificação da aplicação acima, realize a modelagem conceitual, gerando como resultado um Diagrama Entidade
 Relacionamento (DER).
 
+***
+
+<div align="center">
+<img width="600" height="400" src="/DER.png">
+</br>
+  Diagrama de Entidade e Relacionamento.
+</div>
+
+</br>
+
+Cardinalidade refere-se ao número máximo de vezes que a instância em uma entidade pode ser relacionada a instâncias de outra entidade. Ordinalidade, por sua vez, é o número mínimo de vezes que uma instância em uma entidade pode ser associada a uma instância em uma entidade relacionada.
+
+A cardinalidade e a ordinalidade são representadas pelo estilo de uma linha e sua extremidade, de acordo com o estilo de notação escolhido.
+
+Notação de diagramas Entidade-Relacionamento
+
+<div align="center">
+<img width="600" height="400" src="/Cardinalidade.PNG">
+</br>
+  Cardinalidade 
+</div>
+
+
+</br>
+  Cardinalidade 
+</div>
+
+***
 
 ### Tarefa 2
 
