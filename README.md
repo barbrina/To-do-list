@@ -78,20 +78,19 @@ Relacionamento (DER).
 A partir do DER obtido na Tarefa 01, utilize as regras de mapeamento DER/Relacional para construção do modelo lógico
 relacional.
 
-```
-users(<u>id</u>,name,username,password, phone, email)
+users(~id~,name,username,password, phone, email)
 
-taskList(<u>id</u>,name, created_at, updated_at, userId)
+taskList(~id~,name, created_at, updated_at, userId)
     userId referencia users
 
-task(<u>id</u>, descricao, conclusion, deadline, created_at, taskListsId)
+task(~id~, descricao, conclusion, deadline, created_at, taskListsId)
     taskListsId referencia taskList
 
-share (<u>id</u>, accepted, invite_at, taskListsId, userId)
+share (~id~, accepted, invite_at, taskListsId, userId)
     taskListId referencia taskList
     userId referencia users
-```
 
+    
 ### Tarefa 3
 
 A partir do modelo lógico relacional obtido na Tarefa 02, escreva um script SQL para construção do esquema do banco
