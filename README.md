@@ -78,15 +78,15 @@ Relacionamento (DER).
 A partir do DER obtido na Tarefa 01, utilize as regras de mapeamento DER/Relacional para construção do modelo lógico
 relacional.
 
-users(~id~,name,username,password, phone, email)
+users(<u>id</u>,name,username,password, phone, email)
 
-taskList(~id~,name, created_at, updated_at, userId)
+taskList(<u>id</u>,name, created_at, updated_at, userId)
     userId referencia users
 
-task(~id~, descricao, conclusion, deadline, created_at, taskListsId)
+task(<u>id</u>, descricao, conclusion, deadline, created_at, taskListsId)
     taskListsId referencia taskList
 
-share (~id~, accepted, invite_at, taskListsId, userId)
+share (<u>id</u>, accepted, invite_at, taskListsId, userId)
     taskListId referencia taskList
     userId referencia users
 
@@ -96,39 +96,39 @@ share (~id~, accepted, invite_at, taskListsId, userId)
 A partir do modelo lógico relacional obtido na Tarefa 02, escreva um script SQL para construção do esquema do banco
 de dados. Considere que será utilizado o SGBD MySQL para implantação da aplicação.
 
-CREATE TABLE task(
-    id int NOT NULL AUTO_INCREMENT, 
-    descricao varchar(255) NOT NULL, 
-    conclusion tinyint NOT NULL, 
-    deadline datetime NOT NULL, 
-    created_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), 
-    taskListsId varchar(36) NULL, 
-    PRIMARY KEY (id));
+CREATE TABLE task(<br>
+    id int NOT NULL AUTO_INCREMENT, <br>
+    descricao varchar(255) NOT NULL, <br>
+    conclusion tinyint NOT NULL, <br>
+    deadline datetime NOT NULL, <br>
+    created_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), <br>
+    taskListsId varchar(36) NULL, <br>
+    PRIMARY KEY (id));<br>
 
-CREATE TABLE users (
-    id int NOT NULL AUTO_INCREMENT, 
-    name varchar(255) NOT NULL, 
-    username varchar(56) NOT NULL, 
-    password varchar(255) NOT NULL, 
-    phone varchar(255) NOT NULL, 
-    email varchar(255) NOT NULL, 
-    PRIMARY KEY (id));
+CREATE TABLE users (<br>
+    id int NOT NULL AUTO_INCREMENT, <br>
+    name varchar(255) NOT NULL, <br>
+    username varchar(56) NOT NULL, <br>
+    password varchar(255) NOT NULL, <br>
+    phone varchar(255) NOT NULL, <br>
+    email varchar(255) NOT NULL, <br>
+    PRIMARY KEY (id));<br>
 
-CREATE TABLE taskList (
-    id varchar(36) NOT NULL, 
-    name varchar(255) NOT NULL, 
-    created_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), 
-    updated_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), 
-    userId int NULL, 
-    PRIMARY KEY (id));
+CREATE TABLE taskList (<br>
+    id varchar(36) NOT NULL, <br>
+    name varchar(255) NOT NULL, <br>
+    created_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), <br>
+    updated_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), <br>
+    userId int NULL, <br>
+    PRIMARY KEY (id)); <br>
 
-CREATE TABLE share (
-    id int NOT NULL AUTO_INCREMENT, 
-    accepted tinyint NOT NULL, 
-    invite_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), 
-    taskListsId varchar(36) NULL, 
-    userId int NULL, 
-    PRIMARY KEY (id));
+CREATE TABLE share (<br>
+    id int NOT NULL AUTO_INCREMENT, <br>
+    accepted tinyint NOT NULL, <br>
+    invite_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), <br>
+    taskListsId varchar(36) NULL, <br>
+    userId int NULL, <br>
+    PRIMARY KEY (id));<br>
 
 ### Tarefa 4
 
