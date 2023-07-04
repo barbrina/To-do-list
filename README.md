@@ -72,15 +72,64 @@ gerenciamento de tarefas, auxiliando na produtividade e organização pessoal.
 Dada a especificação da aplicação acima, realize a modelagem conceitual, gerando como resultado um Diagrama Entidade
 Relacionamento (DER).
 
+
 ### Tarefa 2
 
 A partir do DER obtido na Tarefa 01, utilize as regras de mapeamento DER/Relacional para construção do modelo lógico
 relacional.
 
+```
+users(<u>id</u>,name,username,password, phone, email)
+
+taskList(<u>id</u>,name, created_at, updated_at, userId)
+    userId referencia users
+
+task(<u>id</u>, descricao, conclusion, deadline, created_at, taskListsId)
+    taskListsId referencia taskList
+
+share (<u>id</u>, accepted, invite_at, taskListsId, userId)
+    taskListId referencia taskList
+    userId referencia users
+```
+
 ### Tarefa 3
 
 A partir do modelo lógico relacional obtido na Tarefa 02, escreva um script SQL para construção do esquema do banco
 de dados. Considere que será utilizado o SGBD MySQL para implantação da aplicação.
+
+CREATE TABLE task(
+    id int NOT NULL AUTO_INCREMENT, 
+    descricao varchar(255) NOT NULL, 
+    conclusion tinyint NOT NULL, 
+    deadline datetime NOT NULL, 
+    created_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), 
+    taskListsId varchar(36) NULL, 
+    PRIMARY KEY (id));
+
+CREATE TABLE users (
+    id int NOT NULL AUTO_INCREMENT, 
+    name varchar(255) NOT NULL, 
+    username varchar(56) NOT NULL, 
+    password varchar(255) NOT NULL, 
+    phone varchar(255) NOT NULL, 
+    email varchar(255) NOT NULL, 
+    PRIMARY KEY (id));
+
+CREATE TABLE taskList (
+    id varchar(36) NOT NULL, 
+    name varchar(255) NOT NULL, 
+    created_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), 
+    updated_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), 
+    userId int NULL, 
+    PRIMARY KEY (id));
+
+CREATE TABLE share (
+    id int NOT NULL AUTO_INCREMENT, 
+    accepted tinyint NOT NULL, 
+    invite_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), 
+    taskListsId varchar(36) NULL, 
+    userId int NULL, 
+    PRIMARY KEY (id));
 
 ### Tarefa 4
 
@@ -96,8 +145,6 @@ com o framework TailWind e adicionamos scripts em JavaScript para aprimorar a fu
 consistiu de quatro telas principais, sendo elas uma landing page, tela de cadastro, de login, a home do usuário contendo 
 as listas e uma tela de tarefas para cada lista.
 
-
-
 ***
 
 ### Tarefa 5
@@ -105,3 +152,80 @@ as listas e uma tela de tarefas para cada lista.
 Escreva um script SQL com todas as consultas utilizadas na implementação da aplicação.
 
 
+        Coloca chaves estrangeiras nas tabelas:
+        ALTER TABLE task 
+        ADD CONSTRAINT FK_a175363c2a1175f22ed36b4399f 
+        FOREIGN KEY (taskListsId) REFERENCES taskList(id) 
+        ON DELETE NO ACTION 
+        ON UPDATE NO ACTION;
+
+        ALTER TABLE taskList 
+        ADD CONSTRAINT FK_dfe093f3246bc267e00f0c7d54c 
+        FOREIGN KEY (userId) REFERENCES users(id) 
+        ON DELETE NO ACTION 
+        ON UPDATE NO ACTION;
+
+
+        ALTER TABLE share 
+        ADD CONSTRAINT FK_7cd7b823095a0c0509c9d350d95 
+        FOREIGN KEY (taskListsId) REFERENCES taskList(id) 
+        ON DELETE NO ACTION 
+        ON UPDATE NO ACTION;
+
+        ALTER TABLE share 
+        ADD CONSTRAINT FK_07e293248ed4aeb7965af840b13 
+        FOREIGN KEY (userId) REFERENCES users(id) 
+        ON DELETE NO ACTION 
+        ON UPDATE NO ACTION;
+        
+
+        Selects:
+        SELECT (name, username, phone, email) FROM users WHERE users.id=user_id; 
+        Mostra as informações do usuário no perfil.
+
+        SELECT (name, created_at, updated_at) FROM taskList WHERE taskList.userId=user_id;
+        Mostra as listas(e as características nome, data de criação e data de modificação dela) que foram criadas pelo usuário.
+
+        SELECT (name, created_at, updated_at) FROM share WHERE share.userId=user_id && share.accepted=true;
+        Mostra as listas (e as características nome, data de criação e data de modificação dela) que foram compartilhadas com o usuário e ele aceitou o compartilhamento;
+
+        SELECT (u.name) FROM share AS s
+        JOIN users AS u ON u.id=s.userID && s.accepted=true
+        JOIN taskList AS t ON t.id=list_id;
+        Mostra o nome dos usuários que foram convidados para uma tabela x e aceitaram.
+
+        SELECT (t.descricao, t.deadline, t.created_at) FROM tasks AS t WHERE t.taskListsId=list_id;
+        Seleciona descrição, data de criação e prazo da tarefa de uma determinada lista.
+
+        SELECT * FROM users WHERE users.email=email;
+        Login, pega pelo email o usuário e depois ele usa o hash que está no banco para ver se aquele hash do banco for descriptografável usando a senha que o usuário mandou, o login segue, caso contrário, um erro é retornada.
+
+        INSERT INTO users( name, username, password, phone, email);
+        Insert usado para o cadastro de usuários, o id é auto incrementado.
+
+        INSERT INTO taskList(name, userId);
+        Insert usado para o cadastro de lista de tarefas, o nome é o único parâmetro que o usuário precisa fornecer, as datas de criacao e de ultima modificação o programa pega da rede automaticamente. O userId o usuário não precisa fornecer, mas há um método que pega ele da sessão do login e passa para o insert.
+
+        INSERT INTO task( descricao, deadline, taskListId);
+        Insert usado para inserir uma tarefa em uma determinada lista, o usuário precisa fornecer somente o prazo se houver e a descricao da tarefa, o id da lista a aplicação ja pega da página que o usuário está (localStorage).
+
+        INSERT INTO share( taskListsId, userId);
+        Compartilha uma tabela com um usuário, nesse caso, o que convida, escreve o nome do usuário e por meio do select abaixo, pega o id, e adiciona na tabela de compartilhamentos.
+
+        Apaga tabelas:
+            DROP TABLE share;
+            DROP TABLE taskList;
+            DROP TABLE users;
+            DROP TABLE task;
+
+        Apaga tarefas(aplicação ja fornece o id):
+            DELETE FROM task WHERE task.id = task_id;
+
+        Apagar lista de tarefas(aplicação ja fornece o id):
+            DELETE FROM taskList WHERE taskList.id = taskList_id;
+
+        Não se usa o grant para setar privilégios, pois a aplicação que faz o tratamento se um usuário é ou não criado da lista para permitir ou não que ele apague algo.
+        
+
+ O tratamento de MySql injection é feito com o próprio framework que utilizamos para desenvolvimento, o typeorm.
+  
