@@ -1,5 +1,4 @@
 # Lista de Tarefas Compartilhada
-Segunda versão do trabalho prática sobre listas de tarefas compartilhadas
 
 <div align="justify">
 
