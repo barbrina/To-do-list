@@ -28,7 +28,7 @@ Após discutirem sobre as funcionalidades que uma aplicação descente de lista 
 vocês elaboraram a uma lista descrevendo essas funcionalidades e que serão implementadas pela aplicação de vocês.
 Abaixo, essas funcionalidades são apresentadas e descritas:
 
-***
+</br>
 
 1. **Cadastro e autenticação de usuários**: A aplicação permite que os usuários se cadastrem, fornecendo um nome
 de usuário e senha, além de informações como nome, telefone, e-mail. O cadastro é necessário para acessar todas
@@ -57,15 +57,13 @@ usuário, permitindo que ele as liste e selecione para visualização e edição
 9. **Visualização e edição de listas de tarefas**: Os usuários podem visualizar suas listas de tarefas e as listas
 compartilhadas. Eles têm a opção de marcar tarefas como concluídas e editar detalhes das tarefas.
 
-***
+</br>
 
 Essas funcionalidades essenciais garantem que os usuários tenham controle total sobre suas listas de tarefas e possam
 colaborar com outras pessoas quando necessário. A aplicação oferecerá uma experiência intuitiva e eficaz para o
 gerenciamento de tarefas, auxiliando na produtividade e organização pessoal.
 
-
-
-## Tarefas
+##
 
 ### Tarefa 1
 
@@ -82,16 +80,15 @@ Relacionamento (DER).
 
 </br>
 
-Cardinalidade refere-se ao número máximo de vezes que a instância em uma entidade pode ser relacionada a instâncias de outra entidade. Ordinalidade, por sua vez, é o número mínimo de vezes que uma instância em uma entidade pode ser associada a uma instância em uma entidade relacionada.
-
-A cardinalidade e a ordinalidade são representadas pelo estilo de uma linha e sua extremidade, de acordo com o estilo de notação escolhido.
-
-Notação de diagramas Entidade-Relacionamento
+Cardinalidade refere-se ao número máximo de vezes que a instância em uma entidade pode ser relacionada a instâncias de 
+outra entidade. Ordinalidade, por sua vez, é o número mínimo de vezes que uma instância em uma entidade pode ser associada
+a uma instância em uma entidade relacionada. A cardinalidade e a ordinalidade são representadas pelo estilo de uma linha e 
+sua extremidade, de acordo com o estilo de notação escolhido.
 
 <div align="center">
-<img width="400" height="400" src="/Cardinalidade.PNG">
+<img width="370" height="300" src="/Cardinalidade.PNG">
 </br>
-  Cardinalidade 
+  Notação de diagramas Entidade-Relacionamento.
 </div>
 
 ***
@@ -101,63 +98,76 @@ Notação de diagramas Entidade-Relacionamento
 A partir do DER obtido na Tarefa 01, utilize as regras de mapeamento DER/Relacional para construção do modelo lógico
 relacional.
 
-users(<u>id</u>,name,username,password, phone, email)
+***
 
-taskList(<u>id</u>,name, created_at, updated_at, userId)
-    userId referencia users
+users ( __id__,name,username,password, phone, email )
+</br>
+taskList ( __id__,name, created_at, updated_at, userId )
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userId referencia users
+</br>
+task ( __id__, descricao, conclusion, deadline, created_at, taskListsId )
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;taskListsId referencia taskList
+</br>
+share ( __id__, accepted, invite_at, taskListsId, userId )
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;taskListId referencia taskList
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userId referencia users
 
-task(<u>id</u>, descricao, conclusion, deadline, created_at, taskListsId)
-    taskListsId referencia taskList
-
-share (<u>id</u>, accepted, invite_at, taskListsId, userId)
-    taskListId referencia taskList
-    userId referencia users
-
+***
     
 ### Tarefa 3
 
 A partir do modelo lógico relacional obtido na Tarefa 02, escreva um script SQL para construção do esquema do banco
 de dados. Considere que será utilizado o SGBD MySQL para implantação da aplicação.
 
-CREATE TABLE task(<br>
-    id int NOT NULL AUTO_INCREMENT, <br>
-    descricao varchar(255) NOT NULL, <br>
-    conclusion tinyint NOT NULL, <br>
-    deadline datetime NOT NULL, <br>
-    created_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), <br>
-    taskListsId varchar(36) NULL, <br>
-    PRIMARY KEY (id));<br>
+***
 
-CREATE TABLE users (<br>
-    id int NOT NULL AUTO_INCREMENT, <br>
-    name varchar(255) NOT NULL, <br>
-    username varchar(56) NOT NULL, <br>
-    password varchar(255) NOT NULL, <br>
-    phone varchar(255) NOT NULL, <br>
-    email varchar(255) NOT NULL, <br>
-    PRIMARY KEY (id));<br>
+```
+  CREATE TABLE task(<br>
+      id int NOT NULL AUTO_INCREMENT, 
+      descricao varchar(255) NOT NULL, 
+      conclusion tinyint NOT NULL, 
+      deadline datetime NOT NULL, 
+      created_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), 
+      taskListsId varchar(36) NULL, 
+      PRIMARY KEY (id));
+  
+  CREATE TABLE users (
+      id int NOT NULL AUTO_INCREMENT,
+      name varchar(255) NOT NULL,
+      username varchar(56) NOT NULL,
+      password varchar(255) NOT NULL, 
+      phone varchar(255) NOT NULL, 
+      email varchar(255) NOT NULL, 
+      PRIMARY KEY (id));
+  
+  CREATE TABLE taskList (
+      id varchar(36) NOT NULL, 
+      name varchar(255) NOT NULL, 
+      created_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+      updated_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+      userId int NULL,
+      PRIMARY KEY (id));
+  
+  CREATE TABLE share (
+      id int NOT NULL AUTO_INCREMENT,
+      accepted tinyint NOT NULL,
+      invite_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+      taskListsId varchar(36) NULL,
+      userId int NULL,
+      PRIMARY KEY (id));
 
-CREATE TABLE taskList (<br>
-    id varchar(36) NOT NULL, <br>
-    name varchar(255) NOT NULL, <br>
-    created_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), <br>
-    updated_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), <br>
-    userId int NULL, <br>
-    PRIMARY KEY (id)); <br>
-
-CREATE TABLE share (<br>
-    id int NOT NULL AUTO_INCREMENT, <br>
-    accepted tinyint NOT NULL, <br>
-    invite_at timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), <br>
-    taskListsId varchar(36) NULL, <br>
-    userId int NULL, <br>
-    PRIMARY KEY (id));<br>
+```
+***
 
 ### Tarefa 4
 
 Implemente a aplicação especificada acima de forma que ela faça uso do banco de dados construído na Tarefa 03. Pode
 ser criada uma aplicação de terminal ou uma aplicação com interface gráfica (desktop ou Web). Essa escolha ficará a
-cargo do grupo de trabalho. A linguagem de programação também deve ser determinada pelo grupo.
+cargo do grupo de trabalho. A linguagem de programação também deve ser determinada pelo grupo. 
 
 ***
 
@@ -172,6 +182,8 @@ as listas e uma tela de tarefas para cada lista.
 ### Tarefa 5
 
 Escreva um script SQL com todas as consultas utilizadas na implementação da aplicação.
+
+***
 
 
         Coloca chaves estrangeiras nas tabelas:
@@ -250,4 +262,5 @@ Escreva um script SQL com todas as consultas utilizadas na implementação da ap
         
 
  O tratamento de MySql injection é feito com o próprio framework que utilizamos para desenvolvimento, o typeorm.
-  
+
+***
