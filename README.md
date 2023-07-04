@@ -266,6 +266,6 @@ Escreva um script SQL com todas as consultas utilizadas na implementação da ap
         Não se usa o grant para setar privilégios, pois a aplicação que faz o tratamento se um usuário é ou não criado da lista para permitir ou não que ele apague algo.
         
 
- O tratamento de MySql injection é feito com o próprio framework que utilizamos para desenvolvimento, o typeorm.
+ O tratamento de MySql injection é feito com o ORM que utilizamos para desenvolvimento, o typeorm.
 
 ***
