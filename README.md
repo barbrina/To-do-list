@@ -169,12 +169,18 @@ ser criada uma aplicação de terminal ou uma aplicação com interface gráfica
 cargo do grupo de trabalho. A linguagem de programação também deve ser determinada pelo grupo. 
 
 ***
+Nosso grupo decidiu desenvolver uma aplicação que possui tanto uma interface [web](https://github.com/barbrina/To-do-list/tree/main/Web) quanto uma interface [desktop](https://github.com/barbrina/To-do-list/tree/main/Desktop). Para
+a interface web, escolhemos TypeScript como linguagem de programação no backend e o banco de dados MySQL. No frontend,
+optamos por utilizar HTML em conjunto com o framework TailWind, e adicionamos scripts em JavaScript para aprimorar a 
+funcionalidade da aplicação. A aplicação consiste em quatro telas principais: uma página inicial, uma tela de cadastro 
+e login, a home do usuário com suas listas e uma tela de tarefas para cada lista.
 
-Nosso grupo decidiu desenvolver uma aplicação com uma interface web. Para o backend, optamos por utilizar TypeScript como 
-linguagem de programação, e o banco de dados designado foi o MySQL. Para o frontend, escolhemos utilizar HTML juntamente 
-com o framework TailWind e adicionamos scripts em JavaScript para aprimorar a funcionalidade da aplicação. Nossa aplicação 
-consistiu de quatro telas principais, sendo elas uma landing page, tela de cadastro, de login, a home do usuário contendo 
-as listas e uma tela de tarefas para cada lista.
+Para a interface desktop, desenvolvemos a aplicação em Python utilizando a biblioteca padrão Tkinter. Essa escolha nos 
+permitiu criar tanto o backend quanto o frontend do aplicativo. Além disso, também utilizamos o banco de dados MySQL na 
+interface desktop para armazenar e gerenciar os dados relevantes da aplicação.
+
+Com essa abordagem, conseguimos criar uma aplicação completa e funcional, com uma interface web e desktop coexistindo 
+e compartilhando o mesmo banco de dados MySQL.
 
 ***
 
