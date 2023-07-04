@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/Notion_App_Logo.png" type="image/x-icon">
+    <title>Perfil</title>
+</head>
+<body>
+    <div id="app">
+
+        <!-- top nav -->
+        <div class="flex justify-between items-center px-6 my-3 py-3 text-gray-800 bg-white sticky top-0 border-b transition duration-150 mb-16">
+            <div class="flex gap-3 items-center">
+                <div class="h-8 w-8">
+                    <a href="notion.html">
+                        <img :src="website.logo" :alt="website.title">
+                    </a>
+                </div>
+                <div class="font-medium">
+                    {{website.title}}
+                </div>
+            </div>
+            <div class="flex gap-4 font-medium capitalize items-center">
+                <a href="entrar.html" class="rounded-sm py-1 px-2 hover:bg-gray-200">
+                    Perfil
+                </a>
+                <div class="w-10 h-10 rounded-full overflow-hidden">
+                   <a href="homepage.html"><img src="images/back.png" alt="Home"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- content wrapper -->
+        <div class="max-w-screen-xl mx-auto items-center h-64 mb-0">
+            <!-- login section -->
+                <div class="min-h-screen">
+                    <div class="max-w-xl mx-auto">
+                      <div class="bg-white shadow-lg rounded-lg p-6">
+                        <div class="flex items-center">
+                          <div class="mr-4">
+                            <img class="w-16 h-16 rounded-full" src="images/perfil.png" alt="Foto do perfil">
+                          </div>
+                          <div>
+                            <h1 class="text-2xl font-bold" id="nome">Nome do Usuário</h1>
+                            <p class="text-gray-600" id="username">@nome</p>
+                          </div>
+                        </div>
+                        <div class="mt-6">
+                          <h2 class="text-lg font-bold mb-2">Informações Pessoais</h2>
+                          <ul class="list-disc pl-6">
+                            <li id="tel">Telefone: (99)9999-9999</li>
+                            <li id="email">Email: usuario@example.com</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+
+            <!-- footer section -->
+            <div class="my-6 mx-16 flex justify-center">
+                <div class="w-200">
+                    <div class="flex gap-3 items-center mb-4">
+                        <img :src="website.logo" :alt="website.title" class="h-8 w-8">
+
+                        <div class="text-sm text-gray-700 mt-2 ">
+                            Trabalho de Banco de Dados.
+                        </div>
+                        <div class="text-sm tebeginxt-gray-700 mt-2">
+                            © 2023 CEFET-MG, Inc.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        <!-- main content wrapper -->
+        </div>
+
+    <!-- vue js app wrapper -->
+    </div>
+    </body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.11.2/jquery.mask.min.js"
+        integrity="sha512-Y/GIYsd+LaQm6bGysIClyez2HGCIN1yrs94wUrHoRAD5RSURkqqVQEU6mM51O90hqS80ABFTGtiDpSXd2O05nw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="scripts/perfil.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                website:{
+                    title:"Notion 2.0",
+                    logo:"images/Notion_App_Logo.png",
+                    cta: "Continuar", 
+                    ctaPlaceholder: "Digite seu email",
+                    ctaPlaceholder2: "Digite seu nome",
+                    ctaPlaceholder3: "Escolha um nome de usuário",
+                    ctaPlaceholder4: "Digite sua sua senha",
+                    ctaPlaceholder5: "budegas" ,
+                },
+            loginSection: {
+                imageLocation: "images/home.png",
+                headline: "Tarefas", 
+            },
+        computed:{
+            stickySignupVisible(){
+                return(window.scrollY > 25 ? true : false)
+            }
+        }
+        }
+        }   
+    )
+</script>
+</html>

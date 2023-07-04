@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/Notion_App_Logo.png" type="image/x-icon">
+    <title>Notion 2.0</title>
+</head>
+<body>
+    <div id="app">
+
+        <!-- top nav -->
+        <div class="flex justify-between items-center px-6 my-0 py-3 text-gray-800 bg-white sticky top-0 border-b transition duration-150">
+            <div class="flex gap-3 items-center">
+                <div class="h-8 w-8">
+                    <img :src="website.logo" :alt="website.title">
+                </div>
+                <div class="font-medium">
+                    {{website.title}}
+                </div>
+            </div>
+            <div class="flex gap-4 font-medium capitalize items-center">
+                <a href="entrar.html" class="rounded-sm py-1 px-2 hover:bg-gray-200">
+                    Entrar
+                </a>
+                <a v-if="!stickySignupVisible" href="cadastro.html" class="rounded-sm py-1 px-2 hover:bg-gray-200">
+                    Cadastrar
+                </a>
+            </div>
+        </div>
+
+        <!-- content wrapper -->
+        <div class="max-w-screen-xl mx-auto">
+            <!-- hero section -->
+            <div class="my-16">
+                <div class="text-center">
+                    <div class="text-6xl font-bold">
+                    </div>
+                    <div class="text-xl text-gray-700 antialiased tracking-wide mb-4">
+                        {{heroSection.subheader}}
+                    </div>
+                    <a href="cadastro.html" class="w-200 h-200">
+                        <button type="submit.prevent" class="bg-black hover:bg-red-700 text-red-100 font-medium hover:text-gray-100 antialiased border border-white rounded px-3 py-2">
+                            {{website.cta}}
+                        </button>
+                    </a>
+                    <div class="text-sm text-gray-600 antialiased my-3">
+                        Para grupos da disciplina de Banco de Dados do CEFET-MG.
+                    </div>
+                </div>
+                <div >
+                    <img :src="heroSection.imageLocation" :alt="heroSection.headline" class="w-5/5 mx-auto mt-16 px-2">
+                </div>
+            </div>
+
+            <!-- footer section -->
+            <div class="my-16 mx-16 flex justify-center">
+                <div class="w-200">
+                    <div class="flex gap-3 items-center mb-4">
+                        <img :src="website.logo" :alt="website.title" class="h-8 w-8">
+
+                        <div class="text-sm text-gray-700 mt-2 ">
+                            Trabalho de Banco de Dados.
+                        </div>
+                        <div class="text-sm text-gray-700 mt-2">
+                            © 2023 CEFET-MG, Inc.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        <!-- main content wrapper -->
+        </div>
+
+    <!-- vue js app wrapper -->
+    </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                website:{
+                    title:"Notion 2.0",
+                    logo:"images/Notion_App_Logo.png",
+                    cta: "Comece por aqui >", 
+                    ctaPlaceholder: "Digite seu email...", 
+                },
+            heroSection: {
+                imageLocation: "images/hero.png",
+                headline: "Suas listas, tarefas & projetos. Unidos.", 
+                subheader: "Uma plataforma de listas de tarefas conectadas onde o trabalho ocorre de maneira mais eficiente e ágil", 
+            },
+        computed:{
+            stickySignupVisible(){
+                return(window.scrollY > 25 ? true : false)
+            }
+        }
+        }
+        }   
+    )
+</script>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/Notion_App_Logo.png" type="image/x-icon">
+    <title>Login</title>
+</head>
+<body>
+    <div id="app">
+
+        <!-- top nav -->
+        <div class="flex justify-between items-center px-6 my-3 py-3 text-gray-800 bg-white sticky top-0 border-b transition duration-150">
+            <div class="flex gap-3 items-center">
+                <div class="h-8 w-8">
+                    <a href="notion.html">
+                        <img :src="website.logo" :alt="website.title">
+                    </a>
+                </div>
+                <div class="font-medium">
+                    {{website.title}}
+                </div>
+            </div>
+        </div>
+
+        <!-- content wrapper -->
+        <div class="max-w-screen-xl mx-auto">
+            <!-- login section -->
+            <div class="flex my-16 h-full">
+                <div class="w-1/4 h-full">
+                    <img :src="loginSection.imageLocation" :alt="loginSection.headline" class="w-5/5 mx-auto mt-16 px-2">
+                </div>
+                <div class="w-3/4 h-full items-center">
+                    <div class="flex flex-col">
+                    <div class="text-center">
+                        <div class="text-6xl font-bold">
+                            {{loginSection.headline}}
+                            <br>
+                        </div>
+                        <form onsubmit="return handleSubmit(event)" class="flex flex-col items-center mb-4">
+                            <input type="text" id="username" name="username" :placeholder="website.email" class="w-2/4 h-15 block bg-gray-200 rounded px-2 py-2 mb-4 font-light text-xl text-center">
+                            <input type="password" id="senha" name="senha":placeholder="website.senha" class=" w-2/4 h-15 bg-gray-200 block border rounded px-2 py-2 mb-4 font-light text-xl text-center">
+                                <button type="submit" class="w-80 h-16 bg-black hover:bg-green-200 hover:text-black text-white font-medium antialiased border border-white rounded px-3 py-2 text-lg">
+                                    {{website.cta}}
+                                </button>
+                        </form>
+                        <a>Novo por aqui? </a>
+                        <a href="cadastro.html"><u>Cadastrar-se</u></a>
+                     </div>
+                    </div>
+                    <!-- <div class="text-sm text-gray-600 antialiased my-3">
+                        Para grupos da disciplina de Banco de Dados do CEFET-MG.
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- footer section -->
+            <div class="my-16 mx-16 flex justify-center">
+                <div class="w-200">
+                    <div class="flex gap-3 items-center mb-4">
+                        <img :src="website.logo" :alt="website.title" class="h-8 w-8">
+
+                        <div class="text-sm text-gray-700 mt-2 ">
+                            Trabalho de Banco de Dados.
+                        </div>
+                        <div class="text-sm tebeginxt-gray-700 mt-2">
+                            © 2023 CEFET-MG, Inc.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        <!-- main content wrapper -->
+        </div>
+
+    <!-- vue js app wrapper -->
+    </div>
+    </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.11.2/jquery.mask.min.js"
+        integrity="sha512-Y/GIYsd+LaQm6bGysIClyez2HGCIN1yrs94wUrHoRAD5RSURkqqVQEU6mM51O90hqS80ABFTGtiDpSXd2O05nw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="scripts/entrar.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                website:{
+                    title:"Notion 2.0",
+                    logo:"images/Notion_App_Logo.png",
+                    cta: "Continuar", 
+                    email: "Digite seu email",
+                    senha: "Digite sua sua senha",  
+                },
+            loginSection: {
+                imageLocation: "images/login.png",
+                headline: "Fazer Login", 
+            },
+        computed:{
+            stickySignupVisible(){
+                return(window.scrollY > 25 ? true : false)
+            }
+        }
+        }
+        }   
+    )
+</script>
+</html>
